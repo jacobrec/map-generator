@@ -30,7 +30,7 @@ def main():
     global viewer
     global featuresize
 
-    if len(sys.argv) not in [1, 2, 3, 4]:
+    if len(sys.argv) not in {2, 3, 4}:
         print("Try the following:\nmain.py [res] [zoom] [seed]\nmain.py help")
         sys.exit(0)
     if sys.argv[1] == "help":
@@ -38,6 +38,7 @@ def main():
         print("The size of the image is 2^[res]")
         print("[zoom] is how close the image is, enter a value from [-3,3] you probably want something around 0. The higher the number the more zoomed in")
         print("All arguments are optional, if you enter two arguments it assumes main.py [res] [zoom] and one assumes main.py [res]")
+        sys.exit(0)
     if len(sys.argv) >= 2:
         x = int(sys.argv[1])
     if len(sys.argv) >= 3:
