@@ -12,6 +12,7 @@ class Generator():
         self.height = size
         self.featuresize = featuresize
         self.detail = detail
+        print("Using {} cores".format(multiprocessing.cpu_count()))
 
         value = Parallel(n_jobs=multiprocessing.cpu_count())(delayed(self.doRow)(y) for y in range(self.height))
         return value
