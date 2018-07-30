@@ -1,11 +1,11 @@
 from generator import *
-from viewer import *
 import sys
 import random
 import threading
-
+from PIL import Image
+from colors import *
 seed = int(random.random()*1000000)
-view = VIEW_NORMAL
+view = 0
 
 windowsize = 2**10
 x = 7
@@ -18,7 +18,7 @@ moisture = []
 heights = []
 
 generator = Generator(seed)
-viewer = Viewer()
+
 
 isDone = False
 
@@ -27,7 +27,6 @@ def main():
     global windowsize
     global seed
     global generator
-    global viewer
     global featuresize
 
     if len(sys.argv) not in [1, 2, 3, 4]:
@@ -38,6 +37,7 @@ def main():
         print("The size of the image is 2^[res]")
         print("[zoom] is how close the image is, enter a value from [-3,3] you probably want something around 0. The higher the number the more zoomed in")
         print("All arguments are optional, if you enter two arguments it assumes main.py [res] [zoom] and one assumes main.py [res]")
+        print("Defaults are 7 2 (random)")
     if len(sys.argv) >= 2:
         x = int(sys.argv[1])
     if len(sys.argv) >= 3:
@@ -74,10 +74,10 @@ def updateRes(newRes):
     size = 2**newRes
 
     print("Generating maps at res("+str(x)+")")
-    if view is not VIEW_MOISTURE_ONLY:
+    if view is not 1:
         heights = generator.generateHeightmap(size,featuresize,detail)
         print("Made height map")
-    if view is not VIEW_HEIGHT_ONLY:
+    if view is not 2:
         moisture = generator.generateHeightmap(size,featuresize,detail)
         print("Made moisture map")
 
